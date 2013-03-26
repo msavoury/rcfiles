@@ -39,6 +39,10 @@ set complete=k~/.vim/dict/php.dict "enable our php dictionary (file must be pres
 "omg that means we don't have to strain that pinky anymore!
 :inoremap jj <Esc>
 
+"Use Enter and Shift-Enter to insert newlines w/o enterting insert mode                                                                  
+map <S-Enter> O<Esc>j
+map <CR> o<Esc>k
+
 " Have Vim jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
