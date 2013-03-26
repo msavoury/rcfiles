@@ -1,0 +1,18 @@
+# Change scrollback to 10000 lines
+defscrollback 10000
+
+# don't display the copyright page
+startup_message off
+
+# status line at the bottom
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rW}%f%n %t%{-}%+w %=%{..G}[%H %l] %{..Y} %m/%d %c "
+
+#keybindings
+bindkey -k k9 screen
+bindkey -k k8 kill
+bindkey -k F2 next
+bindkey -k F1 prev
+
+
