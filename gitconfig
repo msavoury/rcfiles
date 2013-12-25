@@ -1,0 +1,9 @@
+[user]
+	name = Marcos Savoury
+	email = marcossavoury@hotmail.com
+[alias]
+	co = checkout
+	st = status
+
+[color]
+	ui = true
