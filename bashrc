@@ -83,6 +83,7 @@ fi
 
 alias reload='source ~/.bashrc'
 alias bashedit='vim ~/.bashrc'
+alias be='vim ~/.bashrc'
 alias vimedit='vim ~/.vimrc'
 alias activate='chmod a+x '
 
