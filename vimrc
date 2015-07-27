@@ -12,7 +12,13 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-commentary'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -36,7 +42,7 @@ set t_Co=256
 "enable syntax highlighting
 set background=dark
 syntax on
-colorscheme sunburst
+colorscheme wasabi256 
 
 "use relative line numbers
 set relativenumber
@@ -80,6 +86,22 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [LINE=%l/%L][%p%%]\ %{strftime(\"%m/%d/%y\ -\ %H:%M\")}
 
 set scrolloff=3  "minimum lines to keep above and below cursor
+
+set virtualedit=onemore " allow for cursor beyond last character
+set history=1000 " Store a ton of history (default is 20)
+
+"disable swap files that clutter working directory 
+set directory=~/.backup//
+
+" Remove trailing whitespaces and ^M chars
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+au BufRead,BufNewFile *.module set filetype=php
+au BufRead,BufNewFile *.install set filetype=php
+
+
+let g:nerdtree_tabs_open_on_console_startup=1
 
 "set map leader key
 let mapleader = ","
