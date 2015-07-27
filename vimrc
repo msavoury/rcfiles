@@ -1,23 +1,72 @@
 "this has to be the first line to allow all the new Vim features 
 set nocompatible
 
+
+" Start vundle specific stuff
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+" END VUNDLE STUFF 
+
+"set number of available terminal colors
+set t_Co=256
+
 "enable syntax highlighting
+set background=dark
 syntax on
+colorscheme sunburst
+
+"use relative line numbers
+set relativenumber
+
+"5/10 of a second to highlight matching parens
+set matchtime=5
+
 
 "set up our indenting
+
+"indent according to matching braces for code
 set smartindent
+
+"indent to same level of previous line when creating new line
 set autoindent
-set tabstop=4
+
+"number of spaces to use for each step of autoindent
 set shiftwidth=4
 
 "highlight all search results
 set hlsearch
 
-"match braces
+"highlight matching braces
 set showmatch
 
 "set the statusline with current cursor position
 set ruler
+
+"make backspace key work like normal
+set backspace=indent,eol,start
 
 set incsearch  "search for text as it is entered
 set ignorecase "ignore the case when searching
@@ -28,40 +77,42 @@ set cursorline
 
 "always show the statusline
 set laststatus=2
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [LINE=%l/%L][%p%%]\ %{strftime(\"%m/%d/%y\ -\ %H:%M\")}
 
-set scrolljump=5 "lines to jump when curose leaves screen
 set scrolloff=3  "minimum lines to keep above and below cursor
 
-set complete=k~/.vim/dict/php.dict "enable our php dictionary (file must be present"
+"set map leader key
+let mapleader = ","
 
-"we can use jj to escape from insert mode becuase who types that anyway?
-"omg that means we don't have to strain that pinky anymore!
-:inoremap jj <Esc>
+"shortcuts for editing/sourcing vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
-"Use Enter and Shift-Enter to insert newlines w/o enterting insert mode                                                                  
-map <S-Enter> O<Esc>j
-map <CR> o<Esc>k
+"shortcuts for switching windows
+nnoremap <leader>swl <c-w>l<cr>
+nnoremap <leader>swh <c-w>h<cr>
+nnoremap <leader>swj <c-w>j<cr>
+nnoremap <leader>swk <c-w>k<cr>
+"
+"nerdtree shortcuts
+nnoremap <leader>nto :NERDTreeTabsOpen<cr>
+nnoremap <leader>ntc :NERDTreeTabsClose<cr>
+
+"Disable the use of escape & arrow keys in insert mode
+inoremap jk <esc>
+inoremap <esc> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+
+"Insert newline w/o entering insert mode
+"nnoremap <CR>j o<Esc>k
+"nnoremap <CR>k O<Esc>j
+
 
 " Have Vim jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
-
-"Use TAB to complete when typing words, else inserts TABs as usual.
-"Uses dictionary and source files to find matching words to complete.
-
-"See help completion for source,
-"Note: usual completion is on <C-n> but more trouble to press all the time.
-"Never type the same word twice and maybe learn a new spellings!
-"Use the Linux dictionary when spelling is in doubt.
-"Window users can copy the file to their machine.
-function! Tab_Or_Complete()
-  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-    return "\<C-N>"
-  else
-    return "\<Tab>"
-  endif
-endfunction
-:inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
