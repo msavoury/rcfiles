@@ -100,6 +100,7 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 au BufRead,BufNewFile *.module set filetype=php
 au BufRead,BufNewFile *.install set filetype=php
 
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 let g:nerdtree_tabs_open_on_console_startup=1
 
