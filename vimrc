@@ -18,6 +18,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'derekwyatt/vim-scala'
 
 
 " All of your Plugins must be added before the following line
@@ -35,6 +37,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 " END VUNDLE STUFF 
+"
+
+"CtrlP Plugin Settings
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
 
 "set number of available terminal colors
 set t_Co=256
