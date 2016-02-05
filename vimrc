@@ -60,6 +60,7 @@ set matchtime=5
 
 
 "set up our indenting
+set expandtab
 
 "indent according to matching braces for code
 set smartindent
