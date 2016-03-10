@@ -55,6 +55,12 @@ colorscheme wasabi256
 "use relative line numbers
 set relativenumber
 
+"Colors for Line Numbers colum
+"highlight LineNr ctermfg=yellow ctermbg=blue
+
+"Colors for Cursor Row of Line Numbers column
+highlight CursorLineNr ctermfg=yellow ctermbg=blue
+
 "5/10 of a second to highlight matching parens
 set matchtime=5
 
