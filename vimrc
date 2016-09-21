@@ -68,6 +68,9 @@ set matchtime=5
 "set up our indenting
 set expandtab
 
+"number of spaces one 'tab' will enter
+set tabstop=4
+
 "indent according to matching braces for code
 set smartindent
 
