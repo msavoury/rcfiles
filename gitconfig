@@ -1,9 +1,10 @@
 [user]
 	name = Marcos Savoury
-	email = marcossavoury@hotmail.com
+	email = marcossavoury@gmail.com
 [alias]
 	co = checkout
 	st = status
+	br = branch
 
 [color]
 	ui = true
