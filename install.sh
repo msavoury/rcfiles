@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 # Creates backups of dotfiles and then symlinks them to your home directory
 DATETIME=`date "+%Y%m%d%.%H_%M_%S"`
 
-dotfiles=("bashrc" "vimrc" "gitconfig" "screenrc")
+declare -a dotfiles=("bashrc" "vimrc" "gitconfig" "screenrc")
 
 echo "Installing dotfiles..."
 for i in ${dotfiles[@]};
