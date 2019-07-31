@@ -59,7 +59,7 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
-export PS1="\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;5m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\][\A]:\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$\[$(tput sgr0)\] "
+export PS1="\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;5m\]$(HOSTNAME)\[$(tput sgr0)\]\[\033[38;5;15m\][\A]:\[$(tput sgr0)\]\[\033[96;5;m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$\[$(tput sgr0)\] "
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -84,11 +84,16 @@ alias bashedit='vim ~/.bashrc'
 alias be='vim ~/.bashrc'
 alias vimedit='vim ~/.vimrc'
 alias activate='chmod a+x '
+alias ba='vim ~/.bash_aliases'
+
 
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias ls='ls -G'
+
+export LSCOLORS="gxfxcxdxbxegedabagacad" 
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
