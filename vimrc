@@ -50,7 +50,7 @@ set t_Co=256
 "enable syntax highlighting
 set background=dark
 syntax on
-colorscheme wasabi256 
+colorscheme lizard256 
 
 "use relative line numbers
 set relativenumber
@@ -146,6 +146,8 @@ inoremap <Up> <nop>
 inoremap <Down> <nop>
 inoremap <Left> <nop>
 inoremap <Right> <nop>
+" Fix paste bug triggered by the above inoremaps
+set t_BE=
 
 "Insert newline w/o entering insert mode
 "nnoremap <CR>j o<Esc>k
