@@ -81,6 +81,7 @@ fi
 
 alias reload='source ~/.bashrc'
 alias bashedit='vim ~/.bashrc'
+alias myip='ifconfig | grep inet | sort'
 alias be='vim ~/.bashrc'
 alias vimedit='vim ~/.vimrc'
 alias activate='chmod a+x '
@@ -110,3 +111,21 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+
+function grepc() {
+    echo $1
+    grep -irn --color $1 *
+}
+
+function dssh() {
+    docker exec -it $1 /bin/bash
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
