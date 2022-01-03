@@ -59,7 +59,7 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
-export PS1="\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;5m\]$(HOSTNAME)\[$(tput sgr0)\]\[\033[38;5;15m\][\A]:\[$(tput sgr0)\]\[\033[96;5;m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$\[$(tput sgr0)\] "
+export PS1="\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;5m\]${HOSTNAME}\[$(tput sgr0)\]\[\033[38;5;15m\][\A]:\[$(tput sgr0)\]\[\033[96;5;m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$\[$(tput sgr0)\] "
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in

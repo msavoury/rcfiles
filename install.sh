@@ -22,4 +22,6 @@ do
     ln -s $source ~/.$file 
     echo "==="
 done
+echo "creating backup directory for vim..."
+mkdir ~/.backup
 echo "Done."

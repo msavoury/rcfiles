@@ -50,7 +50,7 @@ set t_Co=256
 "enable syntax highlighting
 set background=dark
 syntax on
-colorscheme lizard256 
+"colorscheme lizard256 
 
 "use relative line numbers
 set relativenumber
