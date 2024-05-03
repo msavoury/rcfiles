@@ -1,0 +1,230 @@
+" # Vundle
+" Vundle is a vim plugin manager. Its setup needs 
+" to take place early on in the startup process
+"
+" Make sure to install Vundle beforehand by running
+" the follwing command:
+"  `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+
+" # Vundle Commands 
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+
+" ## Vundle Initialization Start
+
+filetype off "turn of off to avoid unexpected behaviors when Bundle commands are running
+
+set rtp+=~/.vim/bundle/Vundle.vim  " set the runtime path to include Vundle and initialize
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins:
+"call vundle#begin('~/some/path/here')
+
+
+
+" ## Vundle Plugin Installation
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" Plugin 'tpope/vim-fugitive' - install from GitHub Repo
+" Plugin 'L9' - install from http://vim-scripts.org/vim/scripts.html
+" Plugin 'git://git.wincent.com/command-t.git' - install from random git repo
+" Plugin 'file:///home/gmarik/path/to/plugin' - install from local source
+" Plugin 'ascenator/L9', {'name': 'newL9'} - Example of usina an alias to avoid a naming conflict
+
+" ## List of Plugins to install:
+"
+" vim fugitive - a git client
+" Prefix any git command with :Git
+"  use :help fugitive for more info 
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+
+" ## Vundle Intialization End
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+filetype on " turn back on now that vundle is done running
+
+
+" # Vim Setup
+
+" Allow for search results to be highlighted
+set hlsearch
+
+" make searches case insensitive 
+set ignorecase
+" make searches case-sensitive IF a capital letter is used
+" (requires set ignorecase to be true for this to work)
+set smartcase
+
+" Highlight the current line 
+set cursorline
+
+" Set the colors of the current line highlight
+" :hi CursorLine cterm=NONE ctermbg=grey ctermfg=white
+
+" use relative line numbers on the left margin.
+" for absolute numbers, use `set number`
+set relativenumber
+
+" Enable the statusline. Use 0 to turn it off
+" Statuslines can use Vim functions and it is possible to show anything that can be programmed in Vimscript in the statusline.
+set laststatus=2
+
+" Configure the status line
+" see :help statusline for options
+set statusline=
+set statusline+=%{FugitiveStatusline()}
+set statusline+=%#PmenuSel#
+set statusline+=%#LineNr#
+set statusline+=\ %f
+set statusline+=%m\ 
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\ 
+
+" set the statusline with the current cursor position
+" When enabled, the ruler is displayed on the right side of the status line at the bottom of the window. By default, it displays the line number, the column number, the virtual column number, and the relative position of the cursor in the file (as a percentage).
+set ruler
+
+"minimum lines to keep above and below cursor
+set scrolloff=3 
+
+" enable syntax highlighting
+syntax on
+
+" Colors
+" Most terminals use 256 colors. For any option that supports
+" a color value, you can use a name (e.g. Blue), or a numeric
+" value (e.g 123).
+" If you want to know which integer value corresponds to which 
+" color, you can use the following bash script to print out
+" the colors alongside their integer values
+"for fgbg in 38 48 ; do # Foreground / Background
+"    for color in {0..255} ; do # Colors
+"        # Display the color
+"        printf "\e[${fgbg};5;%sm  %3s  \e[0m" $color $color
+"        # Display 6 colors per lines
+"        if [ $((($color + 1) % 6)) == 4 ] ; then
+"            echo # New line
+"        fi
+"    done
+"    echo # New line
+"done
+
+" Below is an example of a highlight command for syntax highlighting
+" the format is `highlight <Group> <font-options>`
+" 
+" For cterm, the valid values are [bold underline reverse italic none]
+highlight Comment cterm=none ctermbg=14 ctermfg=21
+
+" Use the key sequence 'jk' as a means to escape (useful to get out of insert mode)
+inoremap jk <esc>
+
+" Have Vim jump to the last position when " reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+
+" # Vim School
+"
+" ## Buffers Windows and Tabs
+" A buffer is a temporary copy of a file’s contents. When we open a file, Vim loads its contents into memory. The original file remains intact until we save our changes.
+" Along with the buffer, Vim creates a window through which we do the editing. A window, in essence, is a view of a buffer. Multiple windows can display the same file or buffer.
+" So every file you open will be placed in Buffer,  which can be displayed or not. You can cycle through buffers with :bnext and :bprev commands and list them all with the :buffers command.
+" A new window can be created with either :vsp or :sp
+" A new tab can be created with :tabnew
+"
+" ## Leader Key
+"
+" Vim's <leader> key is a way of creating a namespace for commands you want to define. Vim already maps most keys and combinations of Ctrl + (some key), so <leader>(some key) is where you (or plugins) can add custom behavior.
+" For example, if you find yourself frequently deleting exactly 3 words and 7 characters, you might find it convenient to map a command via nmap <leader>d 3dw7x so that pressing the leader key followed by d will delete 3 words and 7 characters. Because it uses the leader key as a prefix, you can be (relatively) assured that you're not stomping on any pre-existing behavior.
+" The default key for <leader> is \, but you can use the command :let mapleader = "," to remap it to another key (, in this case).
+"
+" ## Mappings
+"
+" For a more complete tutorial, visit https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)
+"
+" Key mapping refers to creating a shortcut for repeating a sequence of keys or commands. You can map keys to execute frequently used key sequences or to invoke an Ex command or to invoke a Vim function or to invoke external commands. Using key maps you can define your own Vim commands
+" 
+"
+"The general syntax of a map command is:
+" 
+" {cmd} {attr} {lhs} {rhs}
+" 
+" where
+" {cmd}  is one of ':map', ':map!', ':nmap', ':vmap', ':imap',
+       " ':cmap', ':smap', ':xmap', ':omap', ':lmap', etc.
+" {attr} is optional and one or more of the following: <buffer>, <silent>,
+       " <expr> <script>, <unique> and <special>.
+       " More than one attribute can be specified to a map.
+" {lhs}  left hand side, is a sequence of one or more keys that you will use
+       " in your new shortcut.
+" {rhs}  right hand side, is the sequence of keys that the {lhs} shortcut keys
+       " will execute when entered.
+"
+" For example, the following command maps the <F2> key to display the current date and time:
+" :map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+"
+" The first step in creating a map is to decide the sequence of keys the mapping will run. When you invoke a map, Vim will execute the sequence of keys as though you entered it from the keyboard. You can test the keys for your mapping by manually entering the key sequence and verifying that it performs the desired operation.
+" 
+" The second step is to decide the editing mode (insert mode, visual mode, command-line mode, normal mode, etc.) in which the map should work. Instead of creating a map that works in all the modes, it is better to define the map that works only in selected modes.
+" 
+" The third step is to find an unused key sequence that can be used to invoke the map. You can invoke a map using either a single key or a sequence of keys. :help map-which-keys"
+"
+"Vim supports creating keymaps that work only in specific editing modes. You can create keymaps that work only in normal, insert, visual, select, command and operator pending modes. The following table lists the various map commands and their corresponding editing mode:
+"
+" Commands                        Mode
+" --------                        ----
+" nmap, nnoremap, nunmap          Normal mode
+" imap, inoremap, iunmap          Insert and Replace mode
+" vmap, vnoremap, vunmap          Visual and Select mode
+" xmap, xnoremap, xunmap          Visual mode
+" smap, snoremap, sunmap          Select mode
+" cmap, cnoremap, cunmap          Command-line mode
+" omap, onoremap, ounmap          Operator pending mode
+"
+" ### Nested (recursive) maps
+" When executing a mapped key sequence, if the {lhs} is not a prefix of the {rhs}, then Vim scans and recursively replaces any mapped keys in the {rhs} of the map. This allows you to define nested and recursive mappings. For example, consider the following set of commands:
+
+" :map <F2>  :echo 'Current time = ' . strftime('%c')<CR>
+" :map <F3> <F2>
+" When you press <F3>, Vim executes the mapped key sequence for <F2> and displays the current time.
+
+" Note that Vim recursively checks for mappings on the {rhs} of a map when executing the map and not when defining the map. In the above example, if you redefine the map for <F2> later, then <F3> will execute the new map for <F2>.
+
+" If you include the {lhs} of a map in the {rhs}, then you will create an infinitely recursive key map. For example, the following insert mode map command creates an infinitely recursive map:
+
+" :imap ab xyzab
+" With the above map, when you enter "ab" in insert mode, it is replaced with "xyz" followed by "ab" which is replaced by "xyz" and so on"
+"To prevent Vim from recursively replacing the mapped keys in the {rhs} of map, you can set the 'noremap' option. But instead of setting this option, it is preferable to use the 'noremap' command.
+
+"You can use the 'noremap' command to execute the {rhs} of a map literally without any map substitutions. For example, consider the following command which visually selects the current paragraph:
+
+":map <F2> vip
+"If a map is defined for any character sequence in the {rhs}, then the above command will break. For example, consider the following map command which maps 'vi' to invoke 'gg':
+
+":map vi gg
+"When you invoke <F2>, "vi" in the {rhs} will be replaced with "gg" resulting in an unexpected result. To prevent this from happening, you can use the following map command:
+
+":noremap <F2> vip
+"Vim has the "noremap" version of the map command for all the mode specific map commands. You can use "nnoremap", "inoremap", "cnoremap", "vnoremap", "snoremap", "xnoremap" and "onoremap". In most of the map commands, it is better to use the "noremap" version of the command to prevent unexpected behavior.
+"
+"
+"
+"
+"
+"
+"
+"
